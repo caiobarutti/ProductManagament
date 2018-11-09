@@ -1,0 +1,15 @@
+{
+    "name": "productmanagement",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start": "export ASPNETCORE_ENVIRONMENT=Development && cd ./src/ProductManagement.App/ && dotnet run"
+    },
+    "repository": {
+      "type": "git"
+    },
+    "author": "",
+    "license": "ISC"
+  }
+  
