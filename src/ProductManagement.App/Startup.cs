@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ProductManagement.Infra.Sheets;
 
 namespace ProductManagement.App
 {
@@ -31,6 +32,7 @@ namespace ProductManagement.App
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddScoped(typeof(ICsvParser), typeof(CsvParser));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

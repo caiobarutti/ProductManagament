@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManagement.Infra.Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManagement.Infra.Sheets", "src\ProductManagement.Infra.Sheets\ProductManagement.Infra.Sheets.csproj", "{F9DF4761-7719-44A6-A880-1E001DC353FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManagement.Infra.Sheets.Tests", "src\ProductManagement.Infra.Sheets.Tests\ProductManagement.Infra.Sheets.Tests.csproj", "{79EB18BC-4462-4942-B2E5-60DFD7BE966F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,11 +76,24 @@ Global
 		{F9DF4761-7719-44A6-A880-1E001DC353FD}.Release|x64.Build.0 = Release|Any CPU
 		{F9DF4761-7719-44A6-A880-1E001DC353FD}.Release|x86.ActiveCfg = Release|Any CPU
 		{F9DF4761-7719-44A6-A880-1E001DC353FD}.Release|x86.Build.0 = Release|Any CPU
+		{79EB18BC-4462-4942-B2E5-60DFD7BE966F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79EB18BC-4462-4942-B2E5-60DFD7BE966F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79EB18BC-4462-4942-B2E5-60DFD7BE966F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{79EB18BC-4462-4942-B2E5-60DFD7BE966F}.Debug|x64.Build.0 = Debug|Any CPU
+		{79EB18BC-4462-4942-B2E5-60DFD7BE966F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{79EB18BC-4462-4942-B2E5-60DFD7BE966F}.Debug|x86.Build.0 = Debug|Any CPU
+		{79EB18BC-4462-4942-B2E5-60DFD7BE966F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79EB18BC-4462-4942-B2E5-60DFD7BE966F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79EB18BC-4462-4942-B2E5-60DFD7BE966F}.Release|x64.ActiveCfg = Release|Any CPU
+		{79EB18BC-4462-4942-B2E5-60DFD7BE966F}.Release|x64.Build.0 = Release|Any CPU
+		{79EB18BC-4462-4942-B2E5-60DFD7BE966F}.Release|x86.ActiveCfg = Release|Any CPU
+		{79EB18BC-4462-4942-B2E5-60DFD7BE966F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D12C9FC7-BE5C-479B-9A47-7B5CE4F866D4} = {5A00AA80-E2C6-4F79-A7EA-9FBB62F80CEC}
 		{27BC20C3-F19F-4933-8F84-E0D68D9BAC64} = {5A00AA80-E2C6-4F79-A7EA-9FBB62F80CEC}
 		{9F8748BE-4C4E-42FA-8D9F-18083F33E2F8} = {5A00AA80-E2C6-4F79-A7EA-9FBB62F80CEC}
 		{F9DF4761-7719-44A6-A880-1E001DC353FD} = {5A00AA80-E2C6-4F79-A7EA-9FBB62F80CEC}
+		{79EB18BC-4462-4942-B2E5-60DFD7BE966F} = {5A00AA80-E2C6-4F79-A7EA-9FBB62F80CEC}
 	EndGlobalSection
 EndGlobal
