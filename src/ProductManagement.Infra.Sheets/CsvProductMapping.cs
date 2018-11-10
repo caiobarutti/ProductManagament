@@ -1,3 +1,4 @@
+using ProductManagement.Domain.Products.Csv;
 using TinyCsvParser.Mapping;
 
 namespace ProductManagement.Infra.Sheets {

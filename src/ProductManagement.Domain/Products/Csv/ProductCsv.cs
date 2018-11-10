@@ -1,6 +1,6 @@
 using ProductManagement.Domain._base;
 
-namespace ProductManagement.Infra.Sheets
+namespace ProductManagement.Domain.Products.Csv
 {
     public class ProductCsv : ValueObject<ProductCsv>
     {
@@ -12,13 +12,13 @@ namespace ProductManagement.Infra.Sheets
         public decimal DiscountPrice { get; set; }
         public string DeliveredIn { get; set; }
         public string Q1 { get; set; }
-        public string Size { get; set; }
+        public int Size { get; set; }
         public string Color { get; set; }
 
         public ProductCsv() { }
 
         public ProductCsv(string key, string artikleCode, string colorCode, string description, decimal price, decimal discountPrice,
-            string deliveredIn, string q1, string size, string color)
+            string deliveredIn, string q1, int size, string color)
         {
             Key = key;
             ArtikleCode = artikleCode;

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using ProductManagement.Domain.Products.Csv;
 
-namespace ProductManagement.Infra.Sheets
+namespace ProductManagement.Domain.Products.Csv
 {
     public interface ICsvParser
     {

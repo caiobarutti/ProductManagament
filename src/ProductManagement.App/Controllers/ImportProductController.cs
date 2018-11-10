@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProductManagement.Domain.Products.Services;
 using ProductManagement.Infra.Sheets;
 
 namespace ProductManagement.App.Controllers 
@@ -15,21 +16,32 @@ namespace ProductManagement.App.Controllers
     public class ImportProductController : ControllerBase 
     {
         private readonly IHostingEnvironment _environment;
-        private readonly ICsvParser _csvParser;
+        private readonly IImportProductFromCsvService _importProductFromCsvService;
 
-        public ImportProductController(IHostingEnvironment environment, ICsvParser csvParser)
+        public ImportProductController(IHostingEnvironment environment, IImportProductFromCsvService importProductFromCsvService)
         {
             _environment = environment;
-            _csvParser = csvParser;
+            _importProductFromCsvService = importProductFromCsvService;
         }
 
         [HttpPost]
         [AllowAnonymous]
         [DisableRequestSizeLimit]
-        public IActionResult Import() 
+        public IActionResult Import()
         {
-            var formFile = Request.Form.Files[0];
+            if (Request.Form.Files.Count == 0)
+                return BadRequest("The CSV that contains the data to import is required.");
 
+            var formFile = Request.Form.Files[0];
+            var csv = ParseCsvFileToString(formFile);
+
+            _importProductFromCsvService.Import(csv.ToString());
+
+            return Ok();
+        }
+
+        private static StringBuilder ParseCsvFileToString(IFormFile formFile)
+        {
             var stringBuilder = new StringBuilder();
             using (var sr = new StreamReader(formFile.OpenReadStream(), Encoding.UTF8))
             {
@@ -41,22 +53,7 @@ namespace ProductManagement.App.Controllers
                 }
             }
 
-            var productCsv = _csvParser.Parse(stringBuilder.ToString());
-            
-            return Ok(productCsv);
-        }
-
-        private async Task<string> SaveTheFileIntoDisk(string name, Stream file)
-        {
-            var rootPath = $"{_environment.ContentRootPath}/wwwroot/csv";
-            Directory.CreateDirectory(rootPath);
-
-            var newName = $"{Guid.NewGuid().ToString()}.csv";
-
-            using (var fileStream = new FileStream($"{rootPath}/{newName}", FileMode.Create))
-                await file.CopyToAsync(fileStream);
-
-            return $"{Request.Scheme}://{Request.Host}/UploadsDeDocumentos/{newName}";
+            return stringBuilder;
         }
     }
 }

@@ -9,6 +9,12 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ProductManagement.Domain._base;
+using ProductManagement.Domain.Products.Csv;
+using ProductManagement.Domain.Products.Factory;
+using ProductManagement.Domain.Products.Repository;
+using ProductManagement.Domain.Products.Services;
+using ProductManagement.Infra.Database._base;
 using ProductManagement.Infra.Sheets;
 
 namespace ProductManagement.App
@@ -32,7 +38,10 @@ namespace ProductManagement.App
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
             services.AddScoped(typeof(ICsvParser), typeof(CsvParser));
+            services.AddScoped(typeof(IImportProductFromCsvService), typeof(ImportProductFromCsvService));
+            services.AddScoped(typeof(IProductFactory), typeof(ProductFactory));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

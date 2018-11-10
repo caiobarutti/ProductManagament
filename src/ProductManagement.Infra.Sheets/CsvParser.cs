@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TinyCsvParser;
-using ProductManagement.Domain;
+using ProductManagement.Domain.Products.Csv;
 
 namespace ProductManagement.Infra.Sheets
 {
