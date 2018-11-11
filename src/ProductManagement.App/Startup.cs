@@ -1,22 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProductManagement.Domain._base;
-using ProductManagement.Domain.Products.Csv;
-using ProductManagement.Domain.Products.Factory;
-using ProductManagement.Domain.Products.Repository;
-using ProductManagement.Domain.Products.Services;
+using ProductManagement.DI;
 using ProductManagement.Infra.Database._base;
-using ProductManagement.Infra.Database.Repositories;
-using ProductManagement.Infra.Sheets;
 
 namespace ProductManagement.App
 {
@@ -42,11 +31,7 @@ namespace ProductManagement.App
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
-            services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
-            services.AddScoped(typeof(ICsvParser), typeof(CsvParser));
-            services.AddScoped(typeof(IImportProductFromCsvService), typeof(ImportProductFromCsvService));
-            services.AddScoped(typeof(IProductFactory), typeof(ProductFactory));
+            ConfigureDI.Configure(services);
 
             EnviromentConfiguration.Configure(Configuration["DatabaseConfiguration:ConnectionString"], $"{_env.ContentRootPath}/wwwroot/Disk");
 

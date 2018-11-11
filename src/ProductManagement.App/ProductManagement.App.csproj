@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ProductManagement.DI\ProductManagement.DI.csproj" />
     <ProjectReference Include="..\ProductManagement.Domain\ProductManagement.Domain.csproj" />
-    <ProjectReference Include="..\ProductManagement.Infra.Sheets\ProductManagement.Infra.Sheets.csproj" />
     <ProjectReference Include="..\ProductManagement.Infra.Database\ProductManagement.Infra.Database.csproj" />
   </ItemGroup>
 
