@@ -11,9 +11,8 @@ namespace ProductManagement.Infra.Database._base
         protected IMongoCollection<T> Collection { get; }
 
         public RepositoryBase()
-        {
-            var connectionString = DatabaseConfiguration.ConnectionString;
-            var cliente = new MongoClient(connectionString);
+        { 
+            var cliente = new MongoClient(DatabaseConfiguration.ConnectionString);
             Database = cliente.GetDatabase("product-management");
             Collection = Database.GetCollection<T>(typeof(T).Name);
         }
