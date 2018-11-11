@@ -1,0 +1,48 @@
+﻿@model System.Collections.Generic.IEnumerable<ProductManagement.App.Models.ProductViewModel>
+
+@{
+    ViewData["Title"] = "Products";
+}
+<h2>@ViewData["Title"]</h2>
+
+@if (Model.Any())
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Key</th>
+            <th>Article Code</th>
+            <th>Color Code</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Discount Price</th>
+            <th>Delivered In</th>
+            <th>Category</th>
+            <th>Size</th>
+            <th>Color</th>
+        </tr>
+        </thead>
+        @foreach (var productViewModel in Model)
+        {
+            <tr>
+                <td>@productViewModel.Id</td>
+                <td>@productViewModel.Key</td>
+                <td>@productViewModel.ArticleCode</td>
+                <td>@productViewModel.ColorCode</td>
+                <td>@productViewModel.Description</td>
+                <td>@productViewModel.Price</td>
+                <td>@productViewModel.DiscountPrice</td>
+                <td>@productViewModel.DeliveredIn</td>
+                <td>@productViewModel.Category</td>
+                <td>@productViewModel.Size</td>
+                <td>@productViewModel.Color</td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <h2>Oops, there is no product to show. <br/> Please, use the @Html.ActionLink("import", "Import") feature to populate the database.</h2>
+}

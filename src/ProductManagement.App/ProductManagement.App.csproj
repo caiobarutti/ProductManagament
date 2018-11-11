@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\caiobaruttiproductmanagement - FTP.pubxml" />
+    <None Remove="Properties\PublishProfiles\caiobaruttiproductmanagement - Web Deploy.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
@@ -12,6 +17,12 @@
     <ProjectReference Include="..\ProductManagement.Domain\ProductManagement.Domain.csproj" />
     <ProjectReference Include="..\ProductManagement.Infra.Sheets\ProductManagement.Infra.Sheets.csproj" />
     <ProjectReference Include="..\ProductManagement.Infra.Database\ProductManagement.Infra.Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Product\Import.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
   </ItemGroup>
 
 </Project>

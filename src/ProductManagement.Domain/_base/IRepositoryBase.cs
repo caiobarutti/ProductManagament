@@ -8,5 +8,6 @@ namespace ProductManagement.Domain._base
         void Update(T Entity);
         T GetById(string id);    
         void Remove(T Entity);
+        List<T> GetAll();
     }
 }

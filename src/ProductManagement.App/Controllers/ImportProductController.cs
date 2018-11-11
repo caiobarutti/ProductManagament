@@ -1,13 +1,10 @@
-using System;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Domain.Products.Services;
-using ProductManagement.Infra.Sheets;
 
 namespace ProductManagement.App.Controllers 
 {
@@ -15,12 +12,10 @@ namespace ProductManagement.App.Controllers
     [Route("api/[controller]")]
     public class ImportProductController : ControllerBase 
     {
-        private readonly IHostingEnvironment _environment;
         private readonly IImportProductFromCsvService _importProductFromCsvService;
 
-        public ImportProductController(IHostingEnvironment environment, IImportProductFromCsvService importProductFromCsvService)
+        public ImportProductController(IImportProductFromCsvService importProductFromCsvService)
         {
-            _environment = environment;
             _importProductFromCsvService = importProductFromCsvService;
         }
 
@@ -45,7 +40,7 @@ namespace ProductManagement.App.Controllers
             var stringBuilder = new StringBuilder();
             using (var sr = new StreamReader(formFile.OpenReadStream(), Encoding.UTF8))
             {
-                var line = string.Empty;
+                string line;
 
                 while (!string.IsNullOrEmpty(line = sr.ReadLine()))
                 {
