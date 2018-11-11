@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ProductManagement.Infra.Database._base
 {
-    public static class RepositoryBaseJson
+    public static class JsonRepository
     {
         public static void SaveJson<T>(T entity)
         {

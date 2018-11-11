@@ -12,8 +12,6 @@ namespace ProductManagement.Infra.Database._base
         protected IMongoDatabase Database { get; }
         protected IMongoCollection<T> Collection { get; }
 
-        protected string DiskPath { get; }
-
         public RepositoryBase()
         {
             var connectionString = EnviromentConfiguration.ConnectionString;
@@ -28,7 +26,7 @@ namespace ProductManagement.Infra.Database._base
         public void Save(T entity)
         {
             Collection.InsertOne(entity);
-            RepositoryBaseJson.SaveJson(entity);
+            JsonRepository.SaveJson(entity);
         }
 
         public List<T> GetAll()
@@ -39,7 +37,7 @@ namespace ProductManagement.Infra.Database._base
         public void RemoveAll()
         {
             Collection.DeleteMany("{}");
-            RepositoryBaseJson.RemoveAllJson(typeof(T).Name);
+            JsonRepository.RemoveAllJson(typeof(T).Name);
         }
     }
 }

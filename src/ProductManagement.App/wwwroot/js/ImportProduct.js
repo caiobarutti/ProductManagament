@@ -35,7 +35,7 @@
                                         max: e.total
                                     });
 
-                                    if (e.loaded == e.total) {
+                                    if (e.loaded === e.total) {
                                         $('#divUpload').hide();
                                         $('#divProcessing').show();
                                     }
