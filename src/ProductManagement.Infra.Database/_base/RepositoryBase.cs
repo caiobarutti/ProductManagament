@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using ProductManagement.Domain._base;
 using MongoDB.Driver;
+using System;
 
 namespace ProductManagement.Infra.Database._base
 {
@@ -11,7 +12,8 @@ namespace ProductManagement.Infra.Database._base
 
         public RepositoryBase()
         {
-            var cliente = new MongoClient("mongodb://localhost:27017");
+            var connectionString = DatabaseConfiguration.ConnectionString;
+            var cliente = new MongoClient(connectionString);
             Database = cliente.GetDatabase("product-management");
             Collection = Database.GetCollection<T>(typeof(T).Name);
         }

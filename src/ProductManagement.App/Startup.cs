@@ -15,6 +15,7 @@ using ProductManagement.Domain.Products.Factory;
 using ProductManagement.Domain.Products.Repository;
 using ProductManagement.Domain.Products.Services;
 using ProductManagement.Infra.Database._base;
+using ProductManagement.Infra.Database.Repositories;
 using ProductManagement.Infra.Sheets;
 
 namespace ProductManagement.App
@@ -39,9 +40,12 @@ namespace ProductManagement.App
             });
 
             services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+            services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
             services.AddScoped(typeof(ICsvParser), typeof(CsvParser));
             services.AddScoped(typeof(IImportProductFromCsvService), typeof(ImportProductFromCsvService));
             services.AddScoped(typeof(IProductFactory), typeof(ProductFactory));
+
+            DatabaseConfiguration.Configure(Configuration["DatabaseConfiguration:ConnectionString"]);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
