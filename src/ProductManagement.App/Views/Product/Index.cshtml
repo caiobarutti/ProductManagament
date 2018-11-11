@@ -7,6 +7,8 @@
 
 @if (Model.Any())
 {
+    <button class="btn btn-danger pull-right" type="button" id="btnClear">Clear</button>
+
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -39,10 +41,11 @@
                 <td>@productViewModel.Color</td>
             </tr>
         }
-
     </table>
 }
 else
 {
     <h2>Oops, there is no product to show. <br/> Please, use the @Html.ActionLink("import", "Import") feature to populate the database.</h2>
 }
+
+<script src="~/js/ProductIndex.js"></script>

@@ -28,5 +28,14 @@ namespace ProductManagement.App.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        [Route("api/Product/ClearAll")]
+        public IActionResult Clear()
+        {
+            _productRepository.RemoveAll();
+
+            return Ok();
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace ProductManagement.Domain._base
         T GetById(string id);    
         void Remove(T Entity);
         List<T> GetAll();
+        void RemoveAll();
     }
 }

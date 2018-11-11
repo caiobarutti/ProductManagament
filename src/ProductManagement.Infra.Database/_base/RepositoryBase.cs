@@ -50,5 +50,10 @@ namespace ProductManagement.Infra.Database._base
         {
             return Collection.Find("{}").ToList();
         }
+
+        public void RemoveAll()
+        {
+            Collection.DeleteMany("{}");
+        }
     }
 }
