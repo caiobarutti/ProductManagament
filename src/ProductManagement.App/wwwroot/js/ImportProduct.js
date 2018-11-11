@@ -24,6 +24,7 @@
                 processData: false,
 
                 xhr: function () {
+                    NProgress.start();
                     var myXhr = $.ajaxSettings.xhr();
                     if (myXhr.upload) {
                         $('#divUpload').show();
@@ -49,6 +50,7 @@
             }).done(function () {
                 $('#divUpload').hide();
                 $('#divProcessing').hide();
+                NProgress.done();
 
                 swal({
                     type: 'success',
@@ -60,6 +62,7 @@
                 });
             })
             .fail(function (message) {
+                NProgress.done();
                 $('#divUpload').hide();
                 $('#divProcessing').hide();
                 $('#divSuccess').hide();
