@@ -3,6 +3,7 @@ using ProductManagement.Domain._base;
 using MongoDB.Driver;
 using System;
 using System.Security.Authentication;
+using System.Threading.Tasks;
 
 namespace ProductManagement.Infra.Database._base
 {
@@ -11,13 +12,15 @@ namespace ProductManagement.Infra.Database._base
         protected IMongoDatabase Database { get; }
         protected IMongoCollection<T> Collection { get; }
 
+        protected string DiskPath { get; }
+
         public RepositoryBase()
-        { 
-            string connectionString = DatabaseConfiguration.ConnectionString;
-            MongoClientSettings settings = MongoClientSettings.FromUrl(new MongoUrl(connectionString));
+        {
+            var connectionString = EnviromentConfiguration.ConnectionString;
+            var settings = MongoClientSettings.FromUrl(new MongoUrl(connectionString));
             settings.SslSettings = new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
             
-            var cliente = new MongoClient(DatabaseConfiguration.ConnectionString);
+            var cliente = new MongoClient(EnviromentConfiguration.ConnectionString);
             Database = cliente.GetDatabase("product-management");
             Collection = Database.GetCollection<T>(typeof(T).Name);
         }
@@ -25,25 +28,7 @@ namespace ProductManagement.Infra.Database._base
         public void Save(T entity)
         {
             Collection.InsertOne(entity);
-        }
-
-        public void Update(T entity)
-        {
-            Collection.ReplaceOne(f => f.Id == entity.Id, entity);
-        }
-
-        public T GetById(string id)
-        {
-            var documents = Collection.Find("{ _id:'"+ id +"' }");
-
-            if(documents != null && documents.Any())
-                return documents.Single();
-
-            return null;
-        }
-
-        public void Remove(T entity) {
-            Collection.DeleteOne(f => f.Id == entity.Id);
+            RepositoryBaseJson.SaveJson(entity);
         }
 
         public List<T> GetAll()
@@ -54,6 +39,7 @@ namespace ProductManagement.Infra.Database._base
         public void RemoveAll()
         {
             Collection.DeleteMany("{}");
+            RepositoryBaseJson.RemoveAllJson(typeof(T).Name);
         }
     }
 }

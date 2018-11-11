@@ -32,7 +32,7 @@ namespace ProductManagement.Domain.Products.Csv
             Color = color;
         }
 
-        protected override bool AllAttributesAreEqual(ProductCsv otherValueObject) 
+        protected override bool AllAttributesAreEqual(ProductCsv otherValueObject)
         {
             return Key == otherValueObject.Key && ArtikleCode == otherValueObject.ArtikleCode && ColorCode == otherValueObject.ColorCode
                 && Description == otherValueObject.Description && Price == otherValueObject.Price && DiscountPrice == otherValueObject.DiscountPrice
@@ -41,7 +41,8 @@ namespace ProductManagement.Domain.Products.Csv
 
         protected override int HashCode()
         {
-            throw new System.NotImplementedException();
+            return Key.GetHashCode() ^ ArtikleCode.GetHashCode() ^ ColorCode.GetHashCode() ^ Description.GetHashCode() ^
+                Price.GetHashCode() ^ DiscountPrice.GetHashCode() ^ DeliveredIn.GetHashCode() ^ Q1.GetHashCode() ^ Size.GetHashCode() ^ Color.GetHashCode();
         }
     }
 }

@@ -1,3 +1,4 @@
+using ExpectedObjects;
 using ProductManagement.Domain.Products.Csv;
 using Xunit;
 
@@ -11,7 +12,7 @@ namespace ProductManagement.Domain.Tests.Products.Csv
         private string _description = "vandf";
         private decimal _price = 10m;
         private decimal _discountPrice = 15m;
-        private string _deliveredId = "2 business days";
+        private string _deliveredIn = "2 business days";
         private string _q1 = "boy";
         private int _size = 54;
         private string _color = "blue";
@@ -19,25 +20,30 @@ namespace ProductManagement.Domain.Tests.Products.Csv
         [Fact]
         public void ShouldCreateAProductCsv()
         {
-            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredId, _q1, _size, _color);
+            var productCsvExpected = new
+            {
+                Key = _key,
+                ArtikleCode = _artikleCode,
+                ColorCode = _colorCode,
+                Description = _description,
+                Price = _price,
+                DiscountPrice = _discountPrice,
+                DeliveredIn = _deliveredIn,
+                Q1 = _q1,
+                Size = _size,
+                Color = _color,
+            };
 
-            Assert.Equal(_key, product.Key);
-            Assert.Equal(_artikleCode, product.ArtikleCode);
-            Assert.Equal(_colorCode, product.ColorCode);
-            Assert.Equal(_description, product.Description);
-            Assert.Equal(_price, product.Price);
-            Assert.Equal(_discountPrice, product.DiscountPrice);
-            Assert.Equal(_deliveredId, product.DeliveredIn);
-            Assert.Equal(_q1, product.Q1);
-            Assert.Equal(_size, product.Size);
-            Assert.Equal(_color, product.Color);
+            var productCsv = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredIn, _q1, _size, _color);
+
+            productCsvExpected.ToExpectedObject().Matches(productCsv);
         }
 
         [Fact]
         public void ShouldCreateAProductCsvWhitoutKey()
         {
             _key = string.Empty;
-            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredId, _q1, _size, _color);
+            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredIn, _q1, _size, _color);
 
             Assert.Empty(product.Key);
         }
@@ -46,7 +52,7 @@ namespace ProductManagement.Domain.Tests.Products.Csv
         public void ShouldCreateAProductCsvWhitoutArtikleCode()
         {
             _artikleCode = string.Empty;
-            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredId, _q1, _size, _color);
+            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredIn, _q1, _size, _color);
 
             Assert.Empty(product.ArtikleCode);
         }
@@ -55,7 +61,7 @@ namespace ProductManagement.Domain.Tests.Products.Csv
         public void ShouldCreateAProductCsvWhitoutArticleColorCode()
         {
             _colorCode = string.Empty;
-            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredId, _q1, _size, _color);
+            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredIn, _q1, _size, _color);
 
             Assert.Empty(product.ColorCode);
         }
@@ -64,7 +70,7 @@ namespace ProductManagement.Domain.Tests.Products.Csv
         public void ShouldCreateAProductCsvWhitoutDescription()
         {
             _description = string.Empty;
-            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredId, _q1, _size, _color);
+            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredIn, _q1, _size, _color);
 
             Assert.Empty(product.Description);
         }
@@ -73,7 +79,7 @@ namespace ProductManagement.Domain.Tests.Products.Csv
         public void ShouldCreateAProductCsvWhitoutPrice()
         {
             _price = 0m;
-            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredId, _q1, _size, _color);
+            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredIn, _q1, _size, _color);
 
             Assert.Equal(0m, product.Price);
         }
@@ -82,7 +88,7 @@ namespace ProductManagement.Domain.Tests.Products.Csv
         public void ShouldCreateAProductCsvWhitoutDiscountPrice()
         {
             _discountPrice = 0m;
-            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredId, _q1, _size, _color);
+            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredIn, _q1, _size, _color);
 
             Assert.Equal(0m, product.DiscountPrice);
         }
@@ -90,8 +96,8 @@ namespace ProductManagement.Domain.Tests.Products.Csv
         [Fact]
         public void ShouldCreateAProductCsvWhitoutDeliveredIn()
         {
-            _deliveredId = string.Empty;
-            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredId, _q1, _size, _color);
+            _deliveredIn = string.Empty;
+            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredIn, _q1, _size, _color);
 
             Assert.Empty(product.DeliveredIn);
         }
@@ -100,7 +106,7 @@ namespace ProductManagement.Domain.Tests.Products.Csv
         public void ShouldCreateAProductCsvWhitoutQ1()
         {
             _q1 = string.Empty;
-            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredId, _q1, _size, _color);
+            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredIn, _q1, _size, _color);
 
             Assert.Empty(product.Q1);
         }
@@ -109,7 +115,7 @@ namespace ProductManagement.Domain.Tests.Products.Csv
         public void ShouldCreateAProductCsvWhitoutSize()
         {
             _size = 0;
-            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredId, _q1, _size, _color);
+            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredIn, _q1, _size, _color);
 
             Assert.Equal(0, product.Size);
         }
@@ -118,7 +124,7 @@ namespace ProductManagement.Domain.Tests.Products.Csv
         public void ShouldCreateAProductCsvWhitoutColor()
         {
             _color = string.Empty;
-            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredId, _q1, _size, _color);
+            var product = new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredIn, _q1, _size, _color);
 
             Assert.Empty(product.Color);
         }

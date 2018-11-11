@@ -22,8 +22,11 @@ namespace ProductManagement.App
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IHostingEnvironment _env;
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
+            _env = env;
             Configuration = configuration;
         }
 
@@ -45,7 +48,7 @@ namespace ProductManagement.App
             services.AddScoped(typeof(IImportProductFromCsvService), typeof(ImportProductFromCsvService));
             services.AddScoped(typeof(IProductFactory), typeof(ProductFactory));
 
-            DatabaseConfiguration.Configure(Configuration["DatabaseConfiguration:ConnectionString"]);
+            EnviromentConfiguration.Configure(Configuration["DatabaseConfiguration:ConnectionString"], $"{_env.ContentRootPath}/wwwroot/Disk");
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

@@ -14,9 +14,9 @@ namespace ProductManagement.Domain.Tests.Products.Services
     {
         private readonly Mock<ICsvParser> _csvParser;
         private readonly Mock<IProductFactory> _productFactory;
-        private Mock<IProductRepository> _productRepository;
-        private ImportProductFromCsvService _importProductFromCsvService;
-        private string _csv;
+        private readonly Mock<IProductRepository> _productRepository;
+        private readonly ImportProductFromCsvService _importProductFromCsvService;
+        private readonly string _csv;
         private ProductCsv _productCsv;
         private Product _product;
 
@@ -34,11 +34,12 @@ namespace ProductManagement.Domain.Tests.Products.Services
             InitializeMocks();
         }
 
-        public void InitializeMocks() 
+        private void InitializeMocks() 
         {
             _productCsv = ProductCsvBuilder.AProductCsv().Build();
             var productsCsv = new List<ProductCsv>() { _productCsv };
             _csvParser.Setup(x => x.Parse(_csv)).Returns(productsCsv);
+            _product = ProductBuilder.AProduct().Build();
             
             _productFactory.Setup(x => x.Create(_productCsv)).Returns(_product);
         }

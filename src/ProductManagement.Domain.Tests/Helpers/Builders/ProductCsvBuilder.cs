@@ -11,7 +11,7 @@ namespace ProductManagement.Domain.Tests.Helpers.Builders
         private string _description = "vandf";
         private decimal _price = 10m;
         private decimal _discountPrice = 15m;
-        private string _deliveredId = "2 business days";
+        private string _deliveredIn = "2 business days";
         private string _q1 = "boy";
         private int _size = 54;
         private string _color = "blue";
@@ -23,7 +23,7 @@ namespace ProductManagement.Domain.Tests.Helpers.Builders
 
         public ProductCsv Build()
         {
-            return new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredId, _q1, _size, _color);
+            return new ProductCsv(_key, _artikleCode, _colorCode, _description, _price, _discountPrice, _deliveredIn, _q1, _size, _color);
         }
 
         public ProductCsvBuilder WithKey(string key)
@@ -52,7 +52,7 @@ namespace ProductManagement.Domain.Tests.Helpers.Builders
 
         public ProductCsvBuilder WithDeliveredIn(string deliveredIn)
         {
-            _deliveredId = deliveredIn;
+            _deliveredIn = deliveredIn;
             return this;
         }
 
