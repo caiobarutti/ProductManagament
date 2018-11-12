@@ -5,8 +5,9 @@ using Moq;
 using ProductManagement.Domain.Products.Factory;
 using ProductManagement.Domain.Tests.Helpers.Builders;
 using System.Collections.Generic;
-using ProductManagement.Domain.Products.Repository;
+using System.Linq;
 using ProductManagement.Domain.Products;
+using ProductManagement.Domain.Products.Repositories;
 
 namespace ProductManagement.Domain.Tests.Products.Services
 {
@@ -15,6 +16,7 @@ namespace ProductManagement.Domain.Tests.Products.Services
         private readonly Mock<ICsvParser> _csvParser;
         private readonly Mock<IProductFactory> _productFactory;
         private readonly Mock<IProductRepository> _productRepository;
+        private readonly Mock<IProductJsonRepository> _productJsonRepository;
         private readonly ImportProductFromCsvService _importProductFromCsvService;
         private readonly string _csv;
         private ProductCsv _productCsv;
@@ -28,8 +30,9 @@ namespace ProductManagement.Domain.Tests.Products.Services
             _csvParser = new Mock<ICsvParser>();
             _productFactory = new Mock<IProductFactory>();
             _productRepository = new Mock<IProductRepository>();
+            _productJsonRepository = new Mock<IProductJsonRepository>();
 
-            _importProductFromCsvService = new ImportProductFromCsvService(_csvParser.Object, _productFactory.Object, _productRepository.Object);
+            _importProductFromCsvService = new ImportProductFromCsvService(_csvParser.Object, _productFactory.Object, _productRepository.Object, _productJsonRepository.Object);
 
             InitializeMocks();
         }
@@ -53,19 +56,19 @@ namespace ProductManagement.Domain.Tests.Products.Services
         }
 
         [Fact]
-        public void ShouldCreateTheProductUsingTheProductFactory()
+        public void ShouldSaveAllProducts() 
         {
             _importProductFromCsvService.Import(_csv);
 
-            _productFactory.Verify(x => x.Create(_productCsv), Times.Once);
+            _productRepository.Verify(x => x.SaveAll(It.Is<IEnumerable<Product>>(products => products.Contains(_product))), Times.Once);
         }
 
         [Fact]
-        public void ShouldSaveTheProduct() 
+        public void ShouldSaveIntoJsonAllProducts() 
         {
             _importProductFromCsvService.Import(_csv);
 
-            _productRepository.Verify(x => x.Save(_product), Times.Once);
+            _productJsonRepository.Verify(x => x.SaveAll(It.Is<IEnumerable<Product>>(products => products.Contains(_product))), Times.Once);
         }
     }
 }

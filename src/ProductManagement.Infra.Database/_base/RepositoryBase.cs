@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using ProductManagement.Domain._base;
 using MongoDB.Driver;
-using System;
 using System.Security.Authentication;
-using System.Threading.Tasks;
 
 namespace ProductManagement.Infra.Database._base
 {
@@ -23,10 +21,9 @@ namespace ProductManagement.Infra.Database._base
             Collection = Database.GetCollection<T>(typeof(T).Name);
         }
 
-        public void Save(T entity)
+        public void SaveAll(IEnumerable<T> list)
         {
-            Collection.InsertOne(entity);
-            JsonRepository.SaveJson(entity);
+            Collection.InsertMany(list);
         }
 
         public List<T> GetAll()
@@ -36,8 +33,7 @@ namespace ProductManagement.Infra.Database._base
 
         public void RemoveAll()
         {
-            Collection.DeleteMany("{}");
-            JsonRepository.RemoveAllJson(typeof(T).Name);
+            Database.DropCollection(typeof(T).Name);
         }
     }
 }

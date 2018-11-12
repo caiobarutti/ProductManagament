@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using ProductManagement.App.Models;
-using ProductManagement.Domain.Products.Repository;
+using ProductManagement.Domain.Products.Repositories;
 
 namespace ProductManagement.App.Controllers
 {

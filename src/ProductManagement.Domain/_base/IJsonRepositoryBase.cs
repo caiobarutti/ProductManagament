@@ -2,10 +2,9 @@ using System.Collections.Generic;
 
 namespace ProductManagement.Domain._base
 {
-    public interface IRepositoryBase<T> where T : Entity
+    public interface IJsonRepositoryBase<T> where T : Entity
     {
         void SaveAll(IEnumerable<T> list);
-        List<T> GetAll();
-        void RemoveAll();
+        void RemoveAllJson(string entityName);
     }
 }

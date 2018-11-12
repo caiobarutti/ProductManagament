@@ -6,6 +6,8 @@ namespace ProductManagement.Domain.Products.Factory
     {
         public Product Create(ProductCsv productCsv)
         {
+            if (productCsv == null) return null;
+
             var key = PreventNoIndex(productCsv.Key);
             var articleCode = PreventNoIndex(productCsv.ArtikleCode);
             var colorCode = PreventNoIndex(productCsv.ColorCode);
